@@ -12,3 +12,4 @@
 | Datasets | \|f\| | \|c\| | \|D\| | reference |
 |---|---:|---:|---:|---|
 | MNDS | 500 | 17 | 10,917 |https://github.com/alinapetukhova/mn-ds-news-classification|
+| Shopper | 15 | 2 | 12,330 | |
