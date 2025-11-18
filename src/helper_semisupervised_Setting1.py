@@ -25,15 +25,11 @@ def online_SSL(loader, dataset_size, args, lr, wd):
         
     if args.memory_type == "Update":
         memory = Update(buffer_size=unlabeled_memory_size, device=device)
-    elif args.memory_type == "Window":
-        memory = Window(buffer_size=unlabeled_memory_size, device=device, isLabel=False)
         
-    if labeled_memory_type == "Window":
-        labeled_memory = Window(buffer_size=labeled_memory_size, device=device)
-    elif labeled_memory_type == "Window_time_decaying":
+    if labeled_memory_type == "Window_time_decaying":
         labeled_memory = Window_time_decaying(buffer_size=labeled_memory_size, device=device)
         
-    GSL_type = args.GSL_type # GSL_reg_ver2_bn 
+    GSL_type = args.GSL_type
 
     LABELS = torch.zeros(dataset_size, dtype=torch.bool)
     true_indices = torch.randperm(dataset_size)[:int(label_ratio * dataset_size)]
@@ -85,14 +81,11 @@ def online_SSL(loader, dataset_size, args, lr, wd):
                 memory.partial_fit(input.squeeze(0))
             else:
                 X_combined = torch.cat((feature_buffer_label, temp, input))
-                if args.memory_type != "Window":
-                    model.eval()
-                    with torch.no_grad():
-                        memory_emb = model.edge_scorer.internal_forward(temp)
-                        input_emb = model.edge_scorer.internal_forward(input)
-                    memory.partial_fit_ver2(input, input_emb, memory_emb)
-                else:
-                    memory.partial_fit(input.squeeze(0))
+                model.eval()
+                with torch.no_grad():
+                    memory_emb = model.edge_scorer.internal_forward(temp)
+                    input_emb = model.edge_scorer.internal_forward(input)
+                memory.partial_fit_ver2(input, input_emb, memory_emb)
         
         # --- Test Phase ---
         model.eval()

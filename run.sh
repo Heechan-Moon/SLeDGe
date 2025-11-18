@@ -6,8 +6,8 @@ DATASET="MNIST"
 #DATASET="FashionMNIST"
 
 GSL_type="SLeDGe"
-memory="Update"
-memory2="Window_time_decaying"
+unlabel_memory="Update"
+label_memory="Window_time_decaying"
 
 lambs=(0.001 0.01 0.1 1.0)
 #lambs=(1.0)
@@ -32,8 +32,8 @@ for k in "${ks[@]}"; do
     for lamb in "${lambs[@]}"; do
         for layer in "${layers[@]}"; do
             for gcn_layer in "${gcn_layers[@]}"; do
-                echo "${DATASET} ${k} ${gcn_layer} ${layer} ${lamb} ${memory} ${memory2}"
-                python main.py --directed --memory_constant --dataset=${DATASET} --memory_type=${memory} --labeled_memory_type=${memory2} --GSL_type=${GSL_type} --gcn_layer=${gcn_layer} --k=${k} --embedding_function_layer=${layer} --lamb=${lamb} --gpu=${gpu} --label-ratio=${label_ratio} --labeled_size=${labeled_size} --memory=${mem} --time_decay_tau=${tau}
+                echo "${DATASET} ${k} ${gcn_layer} ${layer} ${lamb} ${unlabel_memory} ${label_memory}"
+                python main.py --directed --memory_constant --dataset=${DATASET} --memory_type=${unlabel_memory} --labeled_memory_type=${label_memory} --GSL_type=${GSL_type} --gcn_layer=${gcn_layer} --k=${k} --embedding_function_layer=${layer} --lamb=${lamb} --gpu=${gpu} --label-ratio=${label_ratio} --labeled_size=${labeled_size} --memory=${mem} --time_decay_tau=${tau}
             done
         done
     done
