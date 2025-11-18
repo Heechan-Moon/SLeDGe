@@ -33,7 +33,7 @@ for k in "${ks[@]}"; do
         for layer in "${layers[@]}"; do
             for gcn_layer in "${gcn_layers[@]}"; do
                 echo "${DATASET} ${k} ${gcn_layer} ${layer} ${lamb} ${unlabel_memory} ${label_memory}"
-                python main.py --directed --memory_constant --dataset=${DATASET} --memory_type=${unlabel_memory} --labeled_memory_type=${label_memory} --GSL_type=${GSL_type} --gcn_layer=${gcn_layer} --k=${k} --embedding_function_layer=${layer} --lamb=${lamb} --gpu=${gpu} --label-ratio=${label_ratio} --labeled_size=${labeled_size} --memory=${mem} --time_decay_tau=${tau}
+                python src/main.py --directed --memory_constant --dataset=${DATASET} --memory_type=${unlabel_memory} --labeled_memory_type=${label_memory} --GSL_type=${GSL_type} --gcn_layer=${gcn_layer} --k=${k} --embedding_function_layer=${layer} --lamb=${lamb} --gpu=${gpu} --label-ratio=${label_ratio} --labeled_size=${labeled_size} --memory=${mem} --time_decay_tau=${tau}
             done
         done
     done

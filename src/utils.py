@@ -18,9 +18,10 @@ from dgl.nn import GraphConv, SAGEConv, GATConv, TAGConv
 from tqdm import tqdm
 import pandas as pd
 
-from functional import symmetry, normalize, enn, knn
-
 import pickle
+
+from typing import Union
+from torch_sparse import SparseTensor, matmul
 
 def dataloader_online(data_name, batch_size=1, num_worker=8):
     transform = transforms.Compose([
@@ -258,10 +259,10 @@ def get_parser():
         help="the number of layer of embedding_function"
     )
     parser.add_argument(
-        "--sparsifier", 
+        "--pruning_function", 
         type=str, 
         default="kNN", 
-        help="kNN or eNN"
+        help="kNN"
     )
     parser.add_argument(
         "--processor", 

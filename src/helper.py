@@ -83,8 +83,8 @@ def online_SSL(loader, dataset_size, args, lr, wd):
                 X_combined = torch.cat((feature_buffer_label, temp, input))
                 model.eval()
                 with torch.no_grad():
-                    memory_emb = model.edge_scorer.internal_forward(temp)
-                    input_emb = model.edge_scorer.internal_forward(input)
+                    memory_emb = model.embedding_function.internal_forward(temp)
+                    input_emb = model.embedding_function.internal_forward(input)
                 memory.partial_fit_ver2(input, input_emb, memory_emb)
         
         # --- Test Phase ---

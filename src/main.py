@@ -5,7 +5,7 @@ import numpy as np
 import os
 from tqdm import tqdm
 
-from helper_semisupervised_Setting1 import online_SSL
+from helper import online_SSL
 from utils import dataloader_online, get_parser
 
 args = get_parser()
@@ -16,8 +16,8 @@ memory, memory_type, memory_constant, labeled_memory_type = args.memory, args.me
 
 labeled_size = args.labeled_size if memory_constant else "Full"
 
-GSL_type, edge_scorer_layer, edge_scorer, sparsifier, processor, lamb = args.GSL_type, args.edge_scorer_layer, args.edge_scorer, args.sparsifier, args.processor, args.lamb
-sparsifier_value = args.k if sparsifier == "kNN" else None
+GSL_type, embedding_function_layer, embedding_function, pruning_function, processor, lamb = args.GSL_type, args.embedding_function_layer, args.embedding_function, args.pruning_function, args.processor, args.lamb
+pruning_function_value = args.k if pruning_function == "kNN" else None
 time_decay_tau = args.time_decay_tau
 
 lrs = [1e-5, 5e-5, 1e-4, 5e-4]
@@ -35,7 +35,7 @@ for lr in lrs:
             torch.backends.cudnn.deterministic = True
             
             loader, dataset_size = dataloader_online(dataset_name)
-            directory = f'[{direction}] SLeDGe ({dataset_name}) ({gcn_layer} GCN)/GSL_{GSL_type}_{edge_scorer_layer}_{edge_scorer}_{sparsifier_value}_{sparsifier}_{processor}_{lamb}/{encoder_name}_{opt_name}_{dataset_name}_{label_ratio}_label_{k}_kNN_{labeled_size}_{labeled_memory_type}_{time_decay_tau}_{memory}_{memory_type}_{memory_constant}'
+            directory = f'[{direction}] SLeDGe ({dataset_name}) ({gcn_layer} GCN)/GSL_{GSL_type}_{embedding_function_layer}_{embedding_function}_{pruning_function_value}_{pruning_function}_{processor}_{lamb}/{encoder_name}_{opt_name}_{dataset_name}_{label_ratio}_label_{k}_kNN_{labeled_size}_{labeled_memory_type}_{time_decay_tau}_{memory}_{memory_type}_{memory_constant}'
             file_name = f'result_{lr}_{wd}_{seed}.pkl'
             if not os.path.exists(directory):
                 os.makedirs(directory, exist_ok=True)
