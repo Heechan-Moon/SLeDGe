@@ -1,5 +1,6 @@
 # SLeDGe
-
+SLeDGe (**S**emi-supervised **Le**arning on **D**ata stream with **G**raph structure l**e**arning) is a framework designed for semi-supervised learning on data streams.
+It jointly learns a predictive model and an adaptive graph structure under scarce labels and limited storage.
 
 ## Experiment
 - Command "bash run.sh".
