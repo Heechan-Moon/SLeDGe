@@ -8,6 +8,8 @@ It jointly learns a predictive model and an adaptive graph structure under scarc
   
 ## Datasets
 - Statistics and references for each dataset are as follows:
+
+
 | Datasets | \|f\| | \|c\| | \|D\| | reference |
 |---|---:|---:|---:|---|
 | MNDS | 500 | 17 | 10,917 |https://github.com/alinapetukhova/mn-ds-news-classification|
