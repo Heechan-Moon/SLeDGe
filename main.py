@@ -5,10 +5,10 @@ import numpy as np
 import os
 from tqdm import tqdm
 
-from helper_semisupervised_Setting1 import online_SSL_kNN_memory_GSL_Setting1 # SSL_online_kNN_online_update_with_memory_StreamKMpp_Cosine_GSL_reg_ver2_bn_Setting1
-from utils_online_integrated_Setting1 import dataloader_online, get_parser_memory_GSL
+from helper_semisupervised_Setting1 import online_SSL
+from utils import dataloader_online, get_parser
 
-args = get_parser_memory_GSL()
+args = get_parser()
 
 opt_name, dataset_name, encoder_name, label_ratio, k, gcn_layer, direction = args.opt, args.dataset, args.encoder, args.label_ratio, args.k, args.gcn_layer, args.directed
 
@@ -43,7 +43,7 @@ for lr in lrs:
                 continue
 
             print(f"================ lr={lr}, wd={wd}, seed={seed} ================")
-            test_accuracies = online_SSL_kNN_memory_GSL_Setting1(loader, dataset_size, args, lr, wd)
+            test_accuracies = online_SSL(loader, dataset_size, args, lr, wd)
             print(f"Avg Final Test ACC: {np.mean(test_accuracies):.4f}")
             print("==="*100)
             with open(f'{directory}/{file_name}', 'wb') as file:

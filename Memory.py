@@ -60,21 +60,16 @@ class Update:
         elif self.centroids.shape[0] < self.buffer_size:
             self.centroids = torch.cat((self.centroids, new_point), dim=0)
         else:
-            # Cosine similarity
             sim = self.centroids @ new_point.T
             cluster_idx = torch.argmax(sim).item()
     
-            # Update count
             self.counts[cluster_idx] += 1
             eta = 1.0 / self.counts[cluster_idx]
     
-            # Incremental update of centroid
-            #updated = (1 - eta) * self.centroids[cluster_idx] + eta * new_point
             updated = self.centroids[cluster_idx] + new_point
             self.centroids[cluster_idx] = F.normalize(updated, p=2, dim=1) 
 
     def partial_fit_ver2(self, new_point, new_point_embs, embs):
-        #new_point = F.normalize(new_point.unsqueeze(0), p=2, dim=1)
         new_point = F.normalize(new_point, p=2, dim=1)
         
         new_point_embs = F.normalize(new_point_embs, p=2, dim=1)
@@ -86,16 +81,12 @@ class Update:
             self.centroids = torch.cat((self.centroids, new_point), dim=0)
             return
         
-        # Cosine similarity
         sim = centroid_embs @ new_point_embs.T
         cluster_idx = torch.argmax(sim).item()
 
-        # Update count
         self.counts[cluster_idx] += 1
         eta = 1.0 / self.counts[cluster_idx]
 
-        # Incremental update of centroid
-        #updated = (1 - eta) * self.centroids[cluster_idx] + eta * new_point
         updated = self.centroids[cluster_idx] + new_point
         self.centroids[cluster_idx] = F.normalize(updated, p=2, dim=1)
 
