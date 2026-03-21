@@ -1,31 +1,40 @@
 # SLeDGe
 SLeDGe (**S**emi-supervised **Le**arning on **D**ata stream with **G**raph structure l**e**arning) is a framework designed for semi-supervised learning on data streams.
-It jointly learns a predictive model and an adaptive graph structure under scarce labels and limited storage.
+It simultaneously learns a predictive model and an adaptive graph structure, specifically optimized for scenarios with scarce labels and limited storage capacity.
 
-## Experiment
-Label ratio can be 0.01 or 0.001.
+## Experiments
 
-### How to run SLedge
-#### Using the best configuration
-- python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
-#### Run all configurations
-- python src/main_SLeDGe_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
-  
-### How to run SLedge_Light
-#### Using the best configuration
-- python src/main_SLeDGe_Light.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
-#### Run all configurations
-- python src/main_SLeDGe_Light_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
+### 1. Overview
+* **Label Ratio:** Supported ratios are `0.01` or `0.001`.
+* **Temporal Weighting:** Append the `-time` flag to enable temporal weighting.
 
-### How to use temporal weighting
-Use -time
-- python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
-- python src/main_SLeDGe_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
-- python src/main_SLeDGe_Light.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
-- python src/main_SLeDGe_Light_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
+### 2. Running SLeDGe
+* **Using the best configuration:**
+    ```bash
+    python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
+    ```
+* **Running all configurations:**
+    ```bash
+    python src/main_SLeDGe_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
+    ```
+
+### 3. Running SLeDGe_Light
+* **Using the best configuration:**
+    ```bash
+    python src/main_SLeDGe_Light.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
+    ```
+* **Running all configurations:**
+    ```bash
+    python src/main_SLeDGe_Light_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
+    ```
+
+### 4. Using Temporal Weighting
+To apply temporal weighting, add `-time` to the end of any command:
+```bash
+python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
   
 ## Datasets
-- Statistics and references for each dataset are as follows:
+- The following table summarizes the statistics and sources for the benchmarks used in this framework.
 
 | Datasets | \|f\| | \|c\| | \|D\| | reference |
 |---|---:|---:|---:|---|
@@ -37,9 +46,9 @@ Use -time
 | KMNIST | 784 | 10 | 70,000 |https://docs.pytorch.org/vision/main/generated/torchvision.datasets.KMNIST.html#torchvision.datasets.KMNIST|
 | FashionMNIST | 784 | 10 | 70,000 |https://docs.pytorch.org/vision/main/generated/torchvision.datasets.FashionMNIST.html#torchvision.datasets.FashionMNIST|
 | Shuttle | 7 | 7 | 58,000 |https://archive.ics.uci.edu/dataset/148/statlog+shuttle|
-| GSD | 128 | 6 | 13,910 |https://archive.ics.uci.edu/dataset/224/gas+sensor+array+drift+dataset|
-| SLDD | 48 | 11 | 58,509 |https://archive.ics.uci.edu/dataset/325/dataset+for+sensorless+drive+diagnosis|
+| GSAD | 128 | 6 | 13,910 |https://archive.ics.uci.edu/dataset/224/gas+sensor+array+drift+dataset|
+| SDD | 48 | 11 | 58,509 |https://archive.ics.uci.edu/dataset/325/dataset+for+sensorless+drive+diagnosis|
 | HAR | 561 | 6 | 10,299 |https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones|
-| Occupancy | 5 | 2 | 20,560 |https://archive.ics.uci.edu/dataset/357/occupancy+detection|
+| OD | 5 | 2 | 20,560 |https://archive.ics.uci.edu/dataset/357/occupancy+detection|
 
 - |f|, |c|, |D| are the number of input features, classes, and data size, respectively.
