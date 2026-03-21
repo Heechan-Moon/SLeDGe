@@ -3,22 +3,29 @@ SLeDGe (**S**emi-supervised **Le**arning on **D**ata stream with **G**raph struc
 It jointly learns a predictive model and an adaptive graph structure under scarce labels and limited storage.
 
 ## Experiment
+Label ratio can be 0.01 or 0.001.
+
 ### How to run SLedge
 #### Using the best configuration
-- python src/main_SLeDGe.py --dataset={dataset_nmae} --gpu={gpu_id} --label-ratio={label_ratio}
+- python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
 #### Run all configurations
-- python src/main_SLeDGe_full.py --dataset={dataset_nmae} --gpu={gpu_id} --label-ratio={label_ratio}
+- python src/main_SLeDGe_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
   
 ### How to run SLedge_Light
 #### Using the best configuration
-- python src/main_SLeDGe_Light.py --dataset={dataset_nmae} --gpu={gpu_id} --label-ratio={label_ratio}
+- python src/main_SLeDGe_Light.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
 #### Run all configurations
-- python src/main_SLeDGe_Light_full.py --dataset={dataset_nmae} --gpu={gpu_id} --label-ratio={label_ratio}
+- python src/main_SLeDGe_Light_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio}
 
+### How to use temporal weighting
+Use -time
+- python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
+- python src/main_SLeDGe_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
+- python src/main_SLeDGe_Light.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
+- python src/main_SLeDGe_Light_full.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
   
 ## Datasets
 - Statistics and references for each dataset are as follows:
-
 
 | Datasets | \|f\| | \|c\| | \|D\| | reference |
 |---|---:|---:|---:|---|
