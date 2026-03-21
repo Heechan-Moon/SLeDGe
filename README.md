@@ -32,7 +32,9 @@ It simultaneously learns a predictive model and an adaptive graph structure, spe
 To apply temporal weighting, add `-time` to the end of any command:
 ```bash
 python src/main_SLeDGe.py --dataset={dataset_name} --gpu={gpu_id} --label-ratio={label_ratio} -time
-  
+
+
+
 ## Datasets
 - The following table summarizes the statistics and sources for the benchmarks used in this framework.
 
